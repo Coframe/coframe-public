@@ -2,8 +2,6 @@
 
 > Bring your UX to life with AI-powered optimization and personalization
 
-[![NPM](https://img.shields.io/npm/v/coframe-ai.svg)](https://www.npmjs.com/package/coframe-ai) [![Build Status](https://github.com/Coframe/coframe-js/actions/workflows/tests.yml/badge.svg)](https://github.com/Coframe/coframe-js/actions/workflows/tests.yml)
-
 ![Coframe Banner](https://files.readme.io/dc9a9f5-coframe-banner.png)
 
 Coframe brings the content of your app or website to life through AI-powered optimization, personalization, and overall self-improvement. It takes minutes to integrate, and the ROI is clear to measure.
