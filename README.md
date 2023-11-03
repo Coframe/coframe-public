@@ -67,11 +67,11 @@ The script will perform the following tasks:
 4. Send the data back to Coframe, where it will be processed to create relevant metrics.
 5. Use the processed data to optimize the variants further and improve your website's overall performance.
 
-You can optionally log and label conversions to be sent to your dashboard for analysis with the following code:
+You can log and label events to be sent to your dashboard for analysis with the following code:
 
-`window.Coframe.logCoframeConversion(label="")`
+`Coframe.logCoframeConversion()`
 
-You can specify any label name, such as "Sign Up", or "Try Demo Button",  if you want to track multiple different events. 
+You can specify any label name as a parameter, such as "Sign Up", or "Try Demo Button", if you want to track multiple different events. 
 
 ## Deploying with API
 
