@@ -56,7 +56,7 @@ You can also remove variants. Through this process of removing and adding varian
 
 To implement the optimization, paste the copied script tags into the head section of your website's page. You'll be able to copy it from the Coframe dashboard, or you can copy it from here and replace the page ID accordingly:
 
-`<script>const COFRAME_PAGE_ID="{{page ID provided here}}";</script>`
+`<script>window.COFRAME_PAGE_ID="{{page ID provided here}}";</script>`
 `<script src='https://unpkg.com/coframe-ai/coframe.js'></script>`
 
 The script will perform the following tasks:
@@ -66,6 +66,12 @@ The script will perform the following tasks:
 3. Gather information on user engagement, such as session duration and conversions.
 4. Send the data back to Coframe, where it will be processed to create relevant metrics.
 5. Use the processed data to optimize the variants further and improve your website's overall performance.
+
+You can log and label events to be sent to your dashboard for analysis with the following code:
+
+`Coframe.logCoframeConversion()`
+
+You can specify any label name as a parameter, such as "Sign Up", or "Try Demo Button", if you want to track multiple different events. 
 
 ## Deploying with API
 
