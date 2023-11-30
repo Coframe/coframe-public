@@ -61,6 +61,7 @@ To implement the optimization, paste the copied script tags into the head sectio
 ```
 
 If using a Next project, you can use a Script from next/script at the root of your project:
+
 ```
 <Script strategy="afterInteractive">
    {`
@@ -72,9 +73,11 @@ If using a Next project, you can use a Script from next/script at the root of yo
    `}
 </Script>
 ```
+
 Alternatively, add it in a useEffect on a single page:
+
 ```
-  useEffect(() => {
+useEffect(() => {
     const coframeId = document.createElement('script')
     coframeId.innerHTML =
       'window.COFRAME_PAGE_ID="{{page ID}}";'
@@ -84,7 +87,7 @@ Alternatively, add it in a useEffect on a single page:
     coframeScript.src = 'https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js'
     coframeScript.async = 1
     document.head.appendChild(coframeScript)
- },[])
+},[])
 ```
 
 The script will perform the following tasks:
