@@ -56,8 +56,35 @@ You can also remove variants. Through this process of removing and adding varian
 To implement the optimization, paste the copied script tags into the head section of your website's page. You'll be able to copy it from the Coframe dashboard, or you can copy it from here and replace the page ID accordingly:
 
 ```
-<script>window.COFRAME_PAGE_ID="{{page ID provided here}}";</script>
+<script>window.COFRAME_PAGE_ID="{{page ID}}";</script>
 <script src='https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js'></script>
+```
+
+If using a Next project, you can use a Script from next/script at the root of your project:
+```
+<Script strategy="afterInteractive">
+   {`
+      window.COFRAME_PAGE_ID="{{page ID}}";
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js';
+      s.async = 1;
+      document.head.appendChild(s);
+   `}
+</Script>
+```
+Alternatively, add it in a useEffect on a single page:
+```
+  useEffect(() => {
+    const coframeId = document.createElement('script')
+    coframeId.innerHTML =
+      'window.COFRAME_PAGE_ID="{{page ID}}";'
+    document.head.appendChild(coframeId)
+
+    const coframeScript = document.createElement('script')
+    coframeScript.src = 'https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js'
+    coframeScript.async = 1
+    document.head.appendChild(coframeScript)
+ },[])
 ```
 
 The script will perform the following tasks:
