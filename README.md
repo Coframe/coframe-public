@@ -85,7 +85,7 @@ useEffect(() => {
 
     const coframeScript = document.createElement('script')
     coframeScript.src = 'https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js'
-    coframeScript.async = 1
+    coframeScript.async = true
     document.head.appendChild(coframeScript)
 },[])
 ```
