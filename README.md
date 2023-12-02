@@ -11,7 +11,6 @@ Coframe brings the content of your app or website to life through AI-powered opt
 1. [Getting Started](#getting-started)
 2. [Coframe Configuration](#coframe-configuration)
 5. [Deploying with a Script Tag](#deploying-with-a-script-tag)
-6. [Deploying with API](#deploying-with-api)
 7. [Upcoming Features](#upcoming-features)
 
 ## Getting Started
@@ -56,8 +55,40 @@ You can also remove variants. Through this process of removing and adding varian
 
 To implement the optimization, paste the copied script tags into the head section of your website's page. You'll be able to copy it from the Coframe dashboard, or you can copy it from here and replace the page ID accordingly:
 
-`<script>window.COFRAME_PAGE_ID="{{page ID provided here}}";</script>`
-`<script src='https://unpkg.com/coframe-ai/coframe.js'></script>`
+```
+<script>window.COFRAME_PAGE_ID="{{page ID}}";</script>
+<script src='https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js'></script>
+```
+
+If using a Next project, you can use a Script from next/script at the root of your project:
+
+```
+<Script strategy="afterInteractive">
+   {`
+      window.COFRAME_PAGE_ID="{{page ID}}";
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js';
+      s.async = 1;
+      document.head.appendChild(s);
+   `}
+</Script>
+```
+
+Alternatively, add it in a useEffect on a single page:
+
+```
+useEffect(() => {
+    const coframeId = document.createElement('script')
+    coframeId.innerHTML =
+      'window.COFRAME_PAGE_ID="{{page ID}}";'
+    document.head.appendChild(coframeId)
+
+    const coframeScript = document.createElement('script')
+    coframeScript.src = 'https://cdn.jsdelivr.net/npm/coframe-ai/dist/cf.min.js'
+    coframeScript.async = true
+    document.head.appendChild(coframeScript)
+},[])
+```
 
 The script will perform the following tasks:
 
@@ -67,58 +98,15 @@ The script will perform the following tasks:
 4. Send the data back to Coframe, where it will be processed to create relevant metrics.
 5. Use the processed data to optimize the variants further and improve your website's overall performance.
 
-You can log and label events to be sent to your dashboard for analysis with the following code:
-
-`Coframe.logCoframeConversion()`
-
-You can specify any label name as a parameter, such as "Sign Up", or "Try Demo Button", if you want to track multiple different events. 
-
-## Deploying with API
-
-To integrate Coframe into your website, mobile app, or other application programmatically:
-
-1. Create a coframe as described above.
-2. Create an API key and include this in the header of the following requests.
-3. Make a GET request to the following URL, which is copyable in your coframe page: `https://coframe.ai/api/v1/retrieve_variant_coframe?coframe_id={{coframe_id}}&session={{true/false}}`
-   - If session = true, we will log this as an impression and return a session_id which you'll need for the following POST request and the response will look like this:
-   ```
-   {
-      "variant_data": {
-         "coframe_page_id": string,
-         "original": string,
-         "variant_id": string,
-         "variant": string
-      },
-      "session_id": string
-   }
-   ```
-   Apply `variant_data.variant` to your application where needed. Save the `session_id`.
-   - If session = false, we will not log this as an impression and the response will look like this:
-   ```
-   {
-      "variant_data": {
-         "coframe_page_id": string,
-         "original": string,
-         "variant_id": string,
-         "variant": string
-      }
-   }
-   ```
-   Apply `variant_data.variant` to your application where needed.
-
-
-4. Make a POST request to `https://coframe.ai/api/v1/session_result` with the body being:
+You can track specific events with the following code snippet:
 
 ```
-{
-   "session_ids":[string],
-   "engagement":boolean (optional),
-   "conversion":boolean (optional),
-   "bounce":boolean (optional)
-}
+// Replace the name with something that makes sense for your product
+Coframe.logCoframeConversion('Pressed Pricing Button')
 ```
+These events will be sent to the dashboard, and can be set as conversion events to help further optimize your experiments. 
 
-Set engagement = true if the user engaged (spent more than 10s, as per the Google Analytics standard for engagement) and conversion = true if the user converted. Similar with bounce. If the user did not engage or convert, you can only send the session_id.
+You can specify any label name as a parameter, such as "Sign Up", or "Try Demo Button", if you want to track multiple different events. Tracking these can help you answer questions about your product like 'What % of users that land on the demo page acutally sign up for a demo?'
 
 ## Upcoming Features
 
