@@ -98,11 +98,11 @@ The script will perform the following tasks:
 4. Send the data back to Coframe, where it will be processed to create relevant metrics.
 5. Use the processed data to optimize the variants further and improve your website's overall performance.
 
-You can track specific events with the following code snippet:
+If you're on the same page, Coframe is a window variable, and you can track specific events with the following code snippet:
 
 ```
 // Replace the name with something that makes sense for your product
-Coframe.logCoframeConversion('Pressed Pricing Button')
+window.Coframe.logCoframeConversion('Pressed Pricing Button')
 ```
 These events will be sent to the dashboard, and can be set as conversion events to help further optimize your experiments. 
 
